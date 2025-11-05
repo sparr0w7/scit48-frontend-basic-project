@@ -1,7 +1,57 @@
+body {
+  background-color: black;
+  color: white;
+}
+
 main.container {
   min-height: 50vh;
+  background: -webkit-linear-gradient(left top, darkblue, black);
+  height: auto;
 }
 
 .page-note {
   color: #555;
+}
+
+main.container {
+  border: 1px solid white;
+  border-radius: 40px;
+}
+
+span.ip {
+  color: #7BA2FF;
+}
+
+p.page-note {
+  color: lightgray;
+}
+
+p.caution {
+  color: #EDE196;
+  border: 1px solid white;
+  border-radius: 40px
+}
+
+span.caution {
+  color: #EDE196;
+  font-weight: bolder;
+}
+
+button.top {
+  background-color: black;
+  color: white;
+  width: 140px;
+  height: 50px;
+  border-radius: 15px;
+
+  font-size: 16px;
+}
+
+#one {
+  background-color: darkblue;
+}
+
+div.footer {
+  border: 1px solid white;
+  border-radius: 40px;
 }

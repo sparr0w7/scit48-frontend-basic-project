@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,17 +8,29 @@
   <link rel="stylesheet" href="../shared/base.css" />
   <link rel="stylesheet" href="./index.css" />
 </head>
+
 <body>
   <div id="header"></div>
   <main class="container">
-    <h1>메인</h1>
-    <p class="page-note">이 페이지는 추후 개발 예정인 플레이스홀더입니다.</p>
+    <h1>로그인 없이, <span class="ip">IP</span>만으로 연결되는 익명 쪽지 네트워크</h1>
+    <p class="page-note">같은 IP 아래, 누군가의 메시지가 머물러 있습니다. 지금 당신의 노드를 확인해 보세요.</p>
+    <p class="caution"><span class="caution">주의</span>: 동일한 IP 내에서는 <span class="caution">쪽지 내용이 공유</span>될 수 있습니다. 공용
+      네트워크(카페・학교・회사 등)에서는 <span class="caution">민감한 정보 <br>
+        입력을 피해주세요</span>.</p>
+    <form action="뭐지" method="post" enctype="multipart/form-data">
+      <button class="top one">내 IP 확인하기</button>
+      <button class="top two">바로 쪽지 보내기</button>
+    </form>
   </main>
-  <div id="footer"></div>
+  <h2>내 노드 상태</h2>
+  <button>쪽지함</button>
+  <button>보낸 편지</button>
+  </div>
   <script type="module">
     import { initLayout } from "../shared/layout.js";
     initLayout();
   </script>
   <script type="module" src="./index.js"></script>
 </body>
+
 </html>
