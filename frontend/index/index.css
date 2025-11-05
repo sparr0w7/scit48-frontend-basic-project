@@ -3,19 +3,40 @@ body {
   color: white;
 }
 
-main.container {
+div.home {
   min-height: 50vh;
-  background: -webkit-linear-gradient(left top, darkblue, black);
+  background: -webkit-linear-gradient(left top, #172132, black);
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
   height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-bottom: 4%;
+}
+
+.home form {
+  margin-bottom: 0;
+}
+
+div.status {
+  min-height: 50vh;
+  background: -webkit-linear-gradient(left top, #172132, black);
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
 }
 
 .page-note {
   color: #555;
 }
 
-main.container {
-  border: 1px solid white;
-  border-radius: 40px;
+h1.maintitle {
+  margin: 0%;
+
 }
 
 span.ip {
@@ -26,25 +47,35 @@ p.page-note {
   color: lightgray;
 }
 
-p.caution {
+.warning-box {
   color: #EDE196;
-  border: 1px solid white;
-  border-radius: 40px
+  background-color: rgba(255, 255, 126, 0.07);
+  border: 2px solid #695B2A;
+  border-radius: 1.3em;
+  display: flex;
+  padding: 1.5%;
+  overflow: hidden;
+  margin-bottom: 2%;
 }
 
 span.caution {
   color: #EDE196;
-  font-weight: bolder;
+  font-weight: bold;
+
 }
 
 button.top {
-  background-color: black;
+  background-color: #14161A;
   color: white;
+  font-size: 16px;
   width: 140px;
   height: 50px;
+  border: 1px solid #24323D;
   border-radius: 15px;
+}
 
-  font-size: 16px;
+button.top:hover {
+  background-color: #373162;
 }
 
 #one {

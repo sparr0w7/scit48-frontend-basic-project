@@ -44,7 +44,7 @@ h1 {
 
 .site-header {
   border-bottom: 1px solid #e0e0e0;
-  background-color: #fafafa;
+  background-color: black;
 }
 
 .site-header__inner {
@@ -59,7 +59,7 @@ h1 {
 
 .site-header__brand a {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .site-header__nav-list {
