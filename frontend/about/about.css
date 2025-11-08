@@ -1,8 +1,105 @@
-/* 주석 */
-main.container {
-  min-height: 50vh;
+body {
+  background-color: black;
+  color: white;
+}
+
+div.home {
+
+  background: -webkit-linear-gradient(left top, #172132, black);
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-bottom: 4%;
+}
+
+.home form {
+  margin-bottom: 0;
+}
+
+div.status {
+
+  background-color: #14131d;
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-top: 20px;
 }
 
 .page-note {
   color: #555;
+}
+
+h1.maintitle {
+  margin: 0%;
+
+}
+
+span.ip {
+  color: #7BA2FF;
+}
+
+p.page-note {
+  color: lightgray;
+}
+
+.warning-box {
+  color: #EDE196;
+  background: -webkit-linear-gradient(top, #3a361a, rgba(255, 255, 126, 0.07));
+  border: 2px solid #695B2A;
+  border-radius: 1.3em;
+  display: flex;
+  padding: 1.5%;
+  overflow: hidden;
+  margin-bottom: 2%;
+}
+
+span.caution {
+  color: #EDE196;
+  font-weight: bold;
+  white-space: nowrap;
+
+}
+
+button.top {
+  background-color: #14161A;
+  color: white;
+  font-size: 16px;
+  width: 140px;
+  height: 50px;
+  border: 1px solid #24323D;
+  border-radius: 15px;
+}
+
+button.top:hover {
+  background-color: #373162;
+}
+
+#one {
+  background-color: darkblue;
+}
+
+div.footer {
+  border: 1px solid white;
+  border-radius: 40px;
+}
+
+p.※ {
+  color: gray;
+}
+
+.FAQ div {
+  background-color: #090d14;
+  border: #162031;
+  border: 2px solid #24323D;
+  padding: 1px;
+}
+
+h2#quickstart+ul li a {
+  color: rgb(88, 88, 126);
 }
