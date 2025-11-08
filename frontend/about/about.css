@@ -103,3 +103,26 @@ p.※ {
 h2#quickstart+ul li a {
   color: rgb(88, 88, 126);
 }
+
+.FAQ [role="button"] {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #1a1a2e;
+  transition: background-color 0.2s;
+}
+
+.FAQ [role="button"]:hover {
+  background-color: #2a2a4e;
+}
+
+.faq-popup {
+  background-color: #1e1e2f;
+  height: auto;
+}
+
+iframe {
+  width: 700px;
+  height: 300px;
+  border: none;
+}
