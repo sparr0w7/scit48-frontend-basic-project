@@ -1,7 +1,21 @@
 import { Request } from 'express';
 
-export function getClientIp(req: Request): string {
-  const forwarded = req.headers['x-forwarded-for'];
+type IpHeaders = Request['headers'] | Record<string, string | string[] | undefined>;
+
+interface IpSource {
+  headers: IpHeaders;
+  ip?: string;
+  socket?: {
+    remoteAddress?: string | undefined;
+  };
+  connection?: {
+    remoteAddress?: string | undefined;
+  };
+  address?: string;
+}
+
+export function getClientIp(source: IpSource): string {
+  const forwarded = source.headers['x-forwarded-for'];
 
   if (typeof forwarded === 'string' && forwarded.length > 0) {
     return forwarded.split(',')[0].trim();
@@ -12,8 +26,10 @@ export function getClientIp(req: Request): string {
   }
 
   return (
-    req.ip ||
-    req.socket?.remoteAddress ||
+    source.ip ||
+    source.address ||
+    source.socket?.remoteAddress ||
+    source.connection?.remoteAddress ||
     ''
   );
 }

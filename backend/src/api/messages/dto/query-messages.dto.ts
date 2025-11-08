@@ -1,15 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { MessageStatus } from '@prisma/client';
 import { Type } from 'class-transformer';
-import {
-  IsEnum,
-  IsIP,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class CursorPaginationDto {
   @ApiPropertyOptional({
@@ -32,15 +24,6 @@ export class CursorPaginationDto {
   @Min(1)
   @Max(50)
   limit?: number;
-}
-
-export class InboxQueryDto extends CursorPaginationDto {
-  @ApiProperty({
-    description: '수신자 IP 주소',
-    example: '198.51.100.23',
-  })
-  @IsIP()
-  toIP: string;
 }
 
 export class StatusParamDto {

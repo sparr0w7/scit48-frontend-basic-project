@@ -6,19 +6,20 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateMessageDto } from './dto/create-message.dto';
-import {
-  CursorPaginationDto,
-  InboxQueryDto,
-} from './dto/query-messages.dto';
+import { CursorPaginationDto } from './dto/query-messages.dto';
 import { Message, MessageStatus, Prisma } from '@prisma/client';
 import { randomUUID } from 'crypto';
+import { MessagesGateway } from './messages.gateway';
 
 @Injectable()
 export class MessagesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly messagesGateway: MessagesGateway,
+  ) {}
 
   async createMessage(dto: CreateMessageDto, fromIP: string) {
-    return this.prisma.message.create({
+    const message = await this.prisma.message.create({
       data: {
         id: randomUUID(),
         fromIP,
@@ -27,10 +28,13 @@ export class MessagesService {
         body: dto.body,
       },
     });
+
+    this.messagesGateway.emitIncomingMessage(message);
+    return message;
   }
 
-  async getInboxMessages(query: InboxQueryDto) {
-    const { toIP, cursor, limit } = query;
+  async getInboxMessages(toIP: string, query: CursorPaginationDto) {
+    const { cursor, limit } = query;
     const paginationLimit = limit ?? 20;
     const cursorMessage = await this.getCursorMessage(cursor);
 
@@ -74,18 +78,27 @@ export class MessagesService {
       throw new BadRequestException('이미 처리된 쪽지는 취소할 수 없습니다.');
     }
 
-    return this.prisma.message.update({
+    const updated = await this.prisma.message.update({
       where: { id },
       data: {
         status: MessageStatus.canceled,
         canceledAt: new Date(),
       },
     });
+
+    this.messagesGateway.emitMessageUpdate(updated);
+    return updated;
   }
 
   async deleteMessage(id: string, fromIP: string) {
-    await this.ensureSenderOwnership(id, fromIP);
+    const message = await this.ensureSenderOwnership(id, fromIP);
     await this.prisma.message.delete({ where: { id } });
+
+    this.messagesGateway.emitMessageDeleted({
+      id: message.id,
+      fromIP: message.fromIP,
+      toIP: message.toIP,
+    });
 
     return { message: '쪽지가 삭제되었습니다.' };
   }

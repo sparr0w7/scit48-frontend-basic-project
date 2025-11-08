@@ -13,11 +13,7 @@ import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { MessageDto } from './dto/message.dto';
-import {
-  CursorPaginationDto,
-  InboxQueryDto,
-  StatusParamDto,
-} from './dto/query-messages.dto';
+import { CursorPaginationDto, StatusParamDto } from './dto/query-messages.dto';
 import { Request } from 'express';
 import { getClientIp } from '../../common/utils/request-ip.util';
 
@@ -25,6 +21,23 @@ import { getClientIp } from '../../common/utils/request-ip.util';
 @Controller('messages')
 export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
+
+  @Get('my-ip')
+  @ApiOperation({ summary: '현재 클라이언트 IP 확인' })
+  @ApiResponse({
+    status: 200,
+    description: '요청을 보낸 클라이언트의 공인 IP',
+    schema: {
+      type: 'object',
+      properties: {
+        ip: { type: 'string', example: '203.0.113.5' },
+      },
+    },
+  })
+  getMyIp(@Req() req: Request) {
+    const ip = getClientIp(req);
+    return { ip };
+  }
 
   @Post()
   @ApiOperation({ summary: '새로운 쪽지 생성' })
@@ -46,9 +59,11 @@ export class MessagesController {
     isArray: false,
   })
   getInboxMessages(
-    @Query(new ValidationPipe({ transform: true })) query: InboxQueryDto,
+    @Req() req: Request,
+    @Query(new ValidationPipe({ transform: true })) query: CursorPaginationDto,
   ) {
-    return this.messagesService.getInboxMessages(query);
+    const toIP = getClientIp(req);
+    return this.messagesService.getInboxMessages(toIP, query);
   }
 
   @Get('sent')
