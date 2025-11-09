@@ -1,7 +1,47 @@
-main.container {
-  min-height: 50vh;
+body {
+  background-color: black;
+  color: white;
+}
+div.status {
+
+  background-color: #14131d;
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-top: 20px;
 }
 
-.page-note {
-  color: #555;
+.warning-box {
+  color: #EDE196;
+  background: -webkit-linear-gradient(top, #3a361a, rgba(255, 255, 126, 0.07));
+  border: 2px solid #695B2A;
+  border-radius: 1.3em;
+  display: flex;
+  padding: 1.5%;
+  overflow: hidden;
+  margin-bottom: 2%;
+}
+
+span.caution {
+  color: #EDE196;
+  font-weight: bold;
+  white-space: nowrap;
+
+}
+
+.box {
+  background-color: #0f0e16;
+  color: white;
+  border: 0;
+}
+.left {
+  display: inline;
+  
+  width: 100px;
+}
+textarea {
+  resize: none;
 }
