@@ -28,11 +28,21 @@ document.querySelectorAll('.FAQ [role="button"]').forEach(button => {
 
         document.body.appendChild(popup);
 
+
+
+
+        button.addEventListener('mouseleave', () => {
+            document.addEventListener('click', () => {
+                popup.remove();
+            });
+        });
+
         popup.addEventListener('mouseleave', () => {
-            popup.remove();
+            document.addEventListener('click', () => {
+                popup.remove();
+            });
         });
 
     });
 });
-
 
