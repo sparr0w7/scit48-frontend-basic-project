@@ -94,6 +94,11 @@ span.warning-title {
   text-decoration: none;
 }
 
+.top:active {
+  background-color: #2c2850;
+  text-decoration: none;
+}
+
 #one {
   background-color: darkblue;
 }
@@ -108,7 +113,8 @@ div.myStatus {
   border: 1px solid #24323D;
   border-radius: 15px;
   overflow: hidden;
-  padding: 1.5%;
+  padding: 1.7%;
+  margin-bottom: 13px;
 }
 
 a.middle {
@@ -127,6 +133,11 @@ a.middle {
 
 a.middle:hover {
   background-color: #373162;
+}
+
+a.middle:active {
+  background-color: #2c2850;
+  text-decoration: none;
 }
 
 .button-row {
