@@ -14,10 +14,22 @@ messageInput.addEventListener("input", () => {
 });
 
 
-const my_ip = "999.999.999.999";
-const my_nickname = "가즈아";
 
-
-const myinfo = document.getElementById("myinfo");
-myinfo.children[0].innerHTML = "내 ip : " + my_ip;
-myinfo.children[2].innerHTML = "닉네임 : " + my_nickname;
+// 주소 가져오기
+let apiUrl = 'https://api.ipify.org?format=json';  
+fetch(apiUrl)
+    .then(response => response.ok ? response.json() : Promise.reject('API 응답 실패'))
+    .then(data => {
+            myinfo.children[0].innerHTML = "내 ip : " + data.ip;
+    });
+       
+    
+//닉네임 가져오기
+const iframe = document.createElement('iframe');
+iframe.src =  "../index/index.html";
+iframe.style.display = 'none';
+iframe.onload = () => {
+    const nickname = iframe.contentWindow.document.querySelector('.yourName .nb').textContent;
+    myinfo.children[2].innerHTML = "닉네임 : " + nickname;
+};
+document.body.appendChild(iframe);
