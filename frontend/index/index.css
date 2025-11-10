@@ -64,7 +64,8 @@ span.warning-title {
   font-weight: bolder;
 }
 
-button.top {
+.top {
+  /* 기존 button.top 스타일 복사 및 <a> 태그 필수 속성 추가 */
   background-color: #14161A;
   color: white;
   font-size: 16px;
@@ -72,11 +73,26 @@ button.top {
   height: 50px;
   border: 1px solid #24323D;
   border-radius: 15px;
+
+  /* <a> 태그를 버튼처럼 보이게 하는 핵심 속성 */
+  display: inline-flex;
+  /* 너비와 높이 적용 및 Flexbox를 이용한 내용 정렬 */
+  align-items: center;
+  /* 텍스트 세로 중앙 정렬 */
+  justify-content: center;
+  /* 텍스트 가로 중앙 정렬 */
+  text-decoration: none;
+  /* 밑줄 제거 */
+  cursor: pointer;
+  /* 마우스 오버 시 포인터 모양 유지 */
+  box-sizing: border-box;
+  /* 패딩/테두리가 너비에 포함되도록 */
 }
 
-
-button.top:hover {
+/* 호버 스타일 (버튼과 동일) */
+.top:hover {
   background-color: #373162;
+  text-decoration: none;
 }
 
 #one {
