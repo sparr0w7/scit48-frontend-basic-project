@@ -2,6 +2,7 @@ body {
   background-color: black;
   color: white;
 }
+
 div.status {
 
   background-color: #14131d;
@@ -33,15 +34,39 @@ span.caution {
 }
 
 .box {
+
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-top: 20px;
   background-color: #0f0e16;
   color: white;
   border: 0;
+
+  border-radius: 5.5%;
 }
+
 .left {
   display: inline;
-  
+
   width: 100px;
 }
+
 textarea {
+  background-color: #14131d;
+  background-size: cover;
+  border-radius: 2.1em;
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-top: 20px;
   resize: none;
+}
+
+#myinfo {
+  background-color: #110e1f;
 }
