@@ -6,7 +6,7 @@ body {
 
 div.home {
   min-height: 50vh;
-  background: -webkit-linear-gradient(left top, #172132, black);
+  background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
@@ -22,7 +22,7 @@ div.home {
 
 div.status {
   min-height: 50vh;
-  background: -webkit-linear-gradient(left top, #172132, black);
+  background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
