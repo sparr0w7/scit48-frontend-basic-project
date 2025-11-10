@@ -26,17 +26,60 @@
         </div>
       </div>
       <form action="뭐지" method="post" enctype="multipart/form-data">
-        <button class="top one">내 IP 확인하기</button>
+        <button class="top one" id="checkIpButton">내 IP 확인하기</button>
         <button class="top two">바로 쪽지 보내기</button>
       </form>
     </div>
 
     <div class="status">
       <h2>내 노드 상태</h2>
-      <button>쪽지함</button>
-      <button>보낸 편지</button>
+      <div class="myStatus">
+        <div class="yourIP">
+          <div class="yourIP">
+            <span class="mb">현재 IP</span>
+            <span class="nb" id="userIpDisplay"></span>
+          </div>
+        </div>
+        <div class="yourName">
+          <span class="mb">익명 닉네임</span>
+          <span class="nb">namenamename</span>
+        </div>
+        <div class="your24">
+          <div class="your24">
+            <span class="mb">대역 (/24)</span>
+            <span class="nb" id="user24Display"></span>
+          </div>
+        </div>
+      </div>
+      <div class="middle button">
+        <div class="button-row">
+          <a href="../inbox/inbox.html" class="middle one">📥쪽지함</a>
+          <a href="../sent/sent.html" class="middle two">📤보낸쪽지</a>
+        </div>
+        <div class="button-row">
+          <a href="../nearby/nearby.html" class="middle three">📡주변 사용자</a>
+          <a href="../stats/stats.html" class="middle four">📊통계</a>
+        </div>
+        <div class="button-row">
+          <a href="../settings/settings.html" class="middle five">⚙️설정</a>
+          <a href="../about/about.html" class="middle six">ℹ️소개</a>
+        </div>
+      </div>
+    </div>
     </div>
 
+    <div class="bottom one">
+      <h3>익명 & 무로그인</h3>
+      <p>회원가입 없이 즉시 시작. 당신의 IP가 닉네임이 됩니다.</p>
+    </div>
+    <div class="bottom two">
+      <h3>IP 대역 네트워킹</h3>
+      <p>같은 대역(/24) 사용자와 자연스럽게 연결됩니다.</p>
+    </div>
+    <div class="bottom three">
+      <h3>로컬 우선 설계</h3>
+      <p>데모 단계에선 LocalStorage로 동작하며, 서버 없이도 흐름을 체험할 수 있습니다.</p>
+    </div>
   </main>
   </div>
   <script type="module">
@@ -44,6 +87,12 @@
     initLayout();
   </script>
   <script type="module" src="./index.js"></script>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p class="copyright">© 2025 IpTalk · 실험적 IP 기반 메시징 프로젝트</p>
+    </div>
+  </footer>
 </body>
 
 </html>
