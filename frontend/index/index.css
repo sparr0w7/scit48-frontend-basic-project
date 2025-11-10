@@ -5,7 +5,6 @@ body {
 }
 
 div.home {
-  min-height: 50vh;
   background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
@@ -13,7 +12,7 @@ div.home {
   height: auto;
   padding: 3%;
   padding-left: 4%;
-  margin-bottom: 4%;
+  margin-bottom: 24px
 }
 
 .home form {
@@ -21,13 +20,13 @@ div.home {
 }
 
 div.status {
-  min-height: 50vh;
   background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
   height: auto;
   padding: 3%;
+  padding-top: 1%;
   padding-left: 4%;
 }
 
@@ -123,6 +122,7 @@ a.middle {
   text-decoration: none;
   justify-content: left;
   align-items: center;
+  padding-left: 7px;
 }
 
 a.middle:hover {

@@ -43,7 +43,7 @@ h1 {
 }
 
 .site-header {
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #24323D;
   background-color: black;
 }
 
@@ -105,4 +105,19 @@ h1 {
   margin: 0;
   font-size: 0.9rem;
   color: #555;
+}
+
+.site-header__brand a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* 로고와 텍스트 사이 간격 */
+}
+
+/* 로고 이미지 크기 조정 */
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #24323D;
+  border-radius: 15px;
 }

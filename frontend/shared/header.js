@@ -25,7 +25,19 @@ export function renderHeader(target) {
   brand.className = "site-header__brand";
   const brandLink = document.createElement("a");
   brandLink.href = new URL("../index/index.html", window.location.href).href;
-  brandLink.textContent = APP_NAME;
+
+  const logoImg = document.createElement("img");
+  logoImg.src = "../shared/logo.png"; // 🚨 로고 이미지 파일 경로를 설정하세요
+  logoImg.alt = APP_NAME + " Logo";
+  logoImg.className = "brand-logo"; // CSS 스타일링을 위한 클래스 추가
+
+  const appNameSpan = document.createElement("span");
+  appNameSpan.textContent = APP_NAME;
+
+  // 3. brandLink에 이미지와 텍스트를 순서대로 추가
+  brandLink.appendChild(logoImg);
+  brandLink.appendChild(appNameSpan);
+
   brand.appendChild(brandLink);
 
   const nav = document.createElement("nav");
