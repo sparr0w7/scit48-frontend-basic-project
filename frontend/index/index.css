@@ -1,18 +1,18 @@
+/*  AI의 도움을 많이 받았습니다  */
 body {
   background-color: black;
   color: white;
 }
 
 div.home {
-  min-height: 50vh;
-  background: -webkit-linear-gradient(left top, #172132, black);
+  background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
   height: auto;
   padding: 3%;
   padding-left: 4%;
-  margin-bottom: 4%;
+  margin-bottom: 24px
 }
 
 .home form {
@@ -20,18 +20,14 @@ div.home {
 }
 
 div.status {
-  min-height: 50vh;
-  background: -webkit-linear-gradient(left top, #172132, black);
+  background: -webkit-linear-gradient(left top, #172132, #0F1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
   height: auto;
   padding: 3%;
+  padding-top: 1%;
   padding-left: 4%;
-}
-
-.page-note {
-  color: #555;
 }
 
 h1.maintitle {
@@ -61,10 +57,14 @@ p.page-note {
 span.caution {
   color: #EDE196;
   font-weight: bold;
-
 }
 
-button.top {
+span.warning-title {
+  font-weight: bolder;
+}
+
+.top {
+  /* 기존 button.top 스타일 복사 및 <a> 태그 필수 속성 추가 */
   background-color: #14161A;
   color: white;
   font-size: 16px;
@@ -72,10 +72,31 @@ button.top {
   height: 50px;
   border: 1px solid #24323D;
   border-radius: 15px;
+
+  /* <a> 태그를 버튼처럼 보이게 하는 핵심 속성 */
+  display: inline-flex;
+  /* 너비와 높이 적용 및 Flexbox를 이용한 내용 정렬 */
+  align-items: center;
+  /* 텍스트 세로 중앙 정렬 */
+  justify-content: center;
+  /* 텍스트 가로 중앙 정렬 */
+  text-decoration: none;
+  /* 밑줄 제거 */
+  cursor: pointer;
+  /* 마우스 오버 시 포인터 모양 유지 */
+  box-sizing: border-box;
+  /* 패딩/테두리가 너비에 포함되도록 */
 }
 
-button.top:hover {
+/* 호버 스타일 (버튼과 동일) */
+.top:hover {
   background-color: #373162;
+  text-decoration: none;
+}
+
+.top:active {
+  background-color: #2c2850;
+  text-decoration: none;
 }
 
 #one {
@@ -85,4 +106,117 @@ button.top:hover {
 div.footer {
   border: 1px solid white;
   border-radius: 40px;
+}
+
+div.myStatus {
+  background-color: #0F1217;
+  border: 1px solid #24323D;
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 1.7%;
+  margin-bottom: 13px;
+}
+
+a.middle {
+  display: flex;
+  background-color: #0F1217;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  border: 1px solid #24323D;
+  border-radius: 15px;
+  text-decoration: none;
+  justify-content: left;
+  align-items: center;
+  padding-left: 7px;
+}
+
+a.middle:hover {
+  background-color: #373162;
+}
+
+a.middle:active {
+  background-color: #2c2850;
+  text-decoration: none;
+}
+
+.button-row {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.button-row a {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.button-row a:first-child {
+  margin-right: 5px;
+}
+
+.yourIP,
+.yourName,
+.your24 {
+  display: flex;
+  align-items: center;
+}
+
+.mb {
+  color: #AAAAAA;
+  width: 120px;
+  flex-shrink: 0;
+  font-size: 0.9em;
+}
+
+.nb {
+  color: #FFFFFF;
+  flex-grow: 1;
+}
+
+div.bottom {
+  background-color: #0F1217;
+  background-size: cover;
+  border: 1px solid #14222D;
+  border-radius: 15px;
+  overflow: hidden;
+  height: auto;
+  margin-top: 2.5%;
+  padding-left: 4%;
+}
+
+div.bottom p {
+  color: lightgray;
+}
+
+.site-footer {
+  background-color: #222222;
+  text-align: center;
+  border-top: none;
+  color: lightgray;
+  padding: 20px 0;
+}
+
+.site-footer__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.copyright {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* IP 표시 요소가 처음에는 보이지 않도록 숨김 */
+#userIpDisplay {
+  visibility: hidden;
+  /* 영역은 유지하고 내용만 숨김 */
+  /* 또는 display: none; 을 사용하여 영역 자체를 없앨 수도 있습니다. */
+}
+
+#userIpDisplay,
+#user24Display {
+  visibility: hidden;
+  /* 영역은 유지하고 내용만 숨김 */
 }
