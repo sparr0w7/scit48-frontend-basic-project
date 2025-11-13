@@ -1,0 +1,35 @@
+// schema.prisma — MySQL (messages only)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") // e.g. mysql://user:pass@localhost:3306/iptalk
+}
+
+// 메시지 상태(enum)
+enum MessageStatus {
+  sent
+  canceled
+  failed
+}
+
+// IP 기반 쪽지
+model Message {
+  id          String         @id @db.VarChar(191)
+  fromIP      String         @map("from_ip") @db.VarChar(45)
+  toIP        String         @map("to_ip")   @db.VarChar(45)
+  subject     String?        @db.VarChar(120)
+  body        String         @db.VarChar(2000)
+  status      MessageStatus  @default(sent)
+  createdAt   DateTime       @default(now()) @map("created_at")  @db.DateTime(3)
+  updatedAt   DateTime       @updatedAt      @map("updated_at")  @db.DateTime(3)
+  canceledAt  DateTime?      @map("canceled_at")                 @db.DateTime(3)
+
+  @@map("messages")
+  @@index([toIP, createdAt, id],   name: "ix_messages_toip_time")
+  @@index([fromIP, createdAt, id], name: "ix_messages_fromip_time")
+  @@index([status],                name: "ix_messages_status")
+}
