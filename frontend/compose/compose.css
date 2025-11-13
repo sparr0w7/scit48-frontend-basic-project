@@ -36,12 +36,30 @@ span.caution {
 .box {
 
   background-size: cover;
-  border-radius: 2.1em;
+  width: 70%;
   overflow: hidden;
   height: auto;
   padding: 3%;
   padding-left: 4%;
-  margin-top: 20px;
+  margin-top: 7px;
+  margin-bottom: 20px;
+  background-color: #0f0e16;
+  color: white;
+  border: 0;
+
+  border-radius: 5.5%;
+}
+
+.box_button {
+
+  background-size: cover;
+
+  overflow: hidden;
+  height: auto;
+  padding: 3%;
+  padding-left: 4%;
+  margin-top: 7px;
+  margin-bottom: 20px;
   background-color: #0f0e16;
   color: white;
   border: 0;

@@ -13,22 +13,21 @@
     <div class="status">
       <h2>쪽지 작성</h2>
       <form action="무야호" method="post" enctype="??">
-        <div class="left"><label for="ip">수신자 IP</label></div>
+        <label for="ip">수신자 IP</label><br>
         <input type="text" name="ip" class="box" placeholder="예) 192.168.0.42"><br>
-        <div class="left"><label for="title">제목(선택)</label></div>
+        <label for="title">제목(선택)</label><br>
         <input type="text" name="title" id="title" class="box" placeholder="예) 안녕하세요"><br>
-        <div class="left"><label for="message">메시지</label></div>
-        <textarea name="message" id="message" class="box" cols="40px" rows="10px"
-          placeholder="내용을 입력하세요 (최대 1000자)"></textarea><br>
-        <div class="left"><input type="submit" value="보내기" class="box">
-          <input type="reset" value="초기화" class="box">
-        </div>
+        <label for="message">메세지</label><br>
+        <textarea name="message" id="message" class="box" placeholder="내용을 입력하세요 (최대 1000자)" rows="15px"></textarea><br>
+        <input type="submit" value="보내기" class="box_button">
+        <input type="reset" value="초기화" class="box_button">
+
       </form>
 
     </div>
     <div class="status">
       <h2>미리보기 & 내 정보</h2>
-      <div class="box">
+      <div class="box button">
         <p id="preview-title">제목 : (없음)</p><br>
         <p id="preview-message">내용 : (내용없음)</p>
       </div>
