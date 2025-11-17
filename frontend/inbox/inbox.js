@@ -23,10 +23,12 @@ const listRender = (messages) => {
     inboxList.innerHTML += `
     <li>
       <a href="#" class="message-item">
-        <span class="msg-index">${item.toIP}</span><br>
-        <span class="msg-title">${item.body}</span>
+        <span class="msg-index"><b>발신자</b> : ${item.toIP}</span><br>
+        <span class="msg-title"><b>내용</b> : ${item.subject}</span><br>
+        <span class="msg-title"><b>날짜</b> : ${item.createdAt}</span>
       </a>
     </li>
+    <hr>
     `;
   });
 };
@@ -43,7 +45,7 @@ const init = async () => {
   connectMessagesSocket({
     onReceived: (msg) => {
       console.log("📩 새 메시지 수신:", msg);
-      messages.push(msg);
+      messages = [msg, ...messages];
       // 예: 받은 쪽지 목록에 추가
       listRender(messages);
     },
@@ -59,12 +61,12 @@ const init = async () => {
     },
   });
   console.log("init");
-  // try {
-  //   const response = await getInboxMessages();
-  //   messages = response.data;
-  //   listRender(messages);
-  // } catch (err) {
-  //   emptyRender();
-  // }
+  try {
+    const response = await getInboxMessages();
+    messages = response.data;
+    listRender(messages);
+  } catch (err) {
+    emptyRender();
+  }
 };
 init();
