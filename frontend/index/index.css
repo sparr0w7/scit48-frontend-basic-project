@@ -5,14 +5,14 @@ body {
 }
 
 div.home {
-  background: -webkit-linear-gradient(left top, #172132, #0F1217);
+  background: -webkit-linear-gradient(left top, #172132, #0f1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
   height: auto;
   padding: 3%;
   padding-left: 4%;
-  margin-bottom: 24px
+  margin-bottom: 24px;
 }
 
 .home form {
@@ -20,7 +20,7 @@ div.home {
 }
 
 div.status {
-  background: -webkit-linear-gradient(left top, #172132, #0F1217);
+  background: -webkit-linear-gradient(left top, #172132, #0f1217);
   background-size: cover;
   border-radius: 2.1em;
   overflow: hidden;
@@ -32,11 +32,10 @@ div.status {
 
 h1.maintitle {
   margin: 0%;
-
 }
 
 span.ip {
-  color: #7BA2FF;
+  color: #7ba2ff;
 }
 
 p.page-note {
@@ -44,9 +43,9 @@ p.page-note {
 }
 
 .warning-box {
-  color: #EDE196;
+  color: #ede196;
   background-color: rgba(255, 255, 126, 0.07);
-  border: 2px solid #695B2A;
+  border: 2px solid #695b2a;
   border-radius: 1.3em;
   display: flex;
   padding: 1.5%;
@@ -55,7 +54,7 @@ p.page-note {
 }
 
 span.caution {
-  color: #EDE196;
+  color: #ede196;
   font-weight: bold;
 }
 
@@ -65,12 +64,12 @@ span.warning-title {
 
 .top {
   /* 기존 button.top 스타일 복사 및 <a> 태그 필수 속성 추가 */
-  background-color: #14161A;
+  background-color: #14161a;
   color: white;
   font-size: 16px;
   width: 140px;
   height: 50px;
-  border: 1px solid #24323D;
+  border: 1px solid #24323d;
   border-radius: 15px;
 
   /* <a> 태그를 버튼처럼 보이게 하는 핵심 속성 */
@@ -109,8 +108,8 @@ div.footer {
 }
 
 div.myStatus {
-  background-color: #0F1217;
-  border: 1px solid #24323D;
+  background-color: #0f1217;
+  border: 1px solid #24323d;
   border-radius: 15px;
   overflow: hidden;
   padding: 1.7%;
@@ -119,11 +118,11 @@ div.myStatus {
 
 a.middle {
   display: flex;
-  background-color: #0F1217;
+  background-color: #0f1217;
   color: white;
   font-size: 16px;
   height: 50px;
-  border: 1px solid #24323D;
+  border: 1px solid #24323d;
   border-radius: 15px;
   text-decoration: none;
   justify-content: left;
@@ -162,21 +161,21 @@ a.middle:active {
 }
 
 .mb {
-  color: #AAAAAA;
+  color: #aaaaaa;
   width: 120px;
   flex-shrink: 0;
   font-size: 0.9em;
 }
 
 .nb {
-  color: #FFFFFF;
+  color: #ffffff;
   flex-grow: 1;
 }
 
 div.bottom {
-  background-color: #0F1217;
+  background-color: #0f1217;
   background-size: cover;
-  border: 1px solid #14222D;
+  border: 1px solid #14222d;
   border-radius: 15px;
   overflow: hidden;
   height: auto;

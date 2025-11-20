@@ -9,9 +9,39 @@
 </head>
 <body>
   <div id="header"></div>
-  <main class="container">
-    <h1>주변 사용자</h1>
-    <p class="page-note">이 페이지는 추후 개발 예정인 플레이스홀더입니다.</p>
+  <main class="container nearby-page">
+    <header class="nearby-header">
+      <h1>주변 사용자</h1>
+      <p class="page-note">
+        같은 /24 대역에서 활동 중인 IP를 자동으로 모아 보여줍니다.
+      </p>
+    </header>
+
+    <section class="nearby-panel">
+      <div class="nearby-network">
+        <p class="nearby-network__label">내 대역 (/24)</p>
+        <p class="nearby-network__value" id="nearby-network">확인 중...</p>
+      </div>
+      <button class="nearby-refresh" id="nearby-refresh" type="button">
+        새로고침
+      </button>
+    </section>
+
+    <section
+      id="nearby-status"
+      class="nearby-status"
+      role="status"
+      aria-live="polite"
+    >
+      주변 사용자 데이터를 불러오는 중입니다.
+    </section>
+
+    <section
+      id="nearby-list"
+      class="nearby-grid"
+      aria-live="polite"
+      aria-label="주변 사용자 카드 목록"
+    ></section>
   </main>
   <div id="footer"></div>
   <script type="module">

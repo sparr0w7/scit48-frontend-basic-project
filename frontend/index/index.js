@@ -1,3 +1,7 @@
+import { attachSocketLogger } from "../shared/messagesSocket.js";
+
+attachSocketLogger("index");
+
 // 파일: ./index.js   AI의 도움을 많이 받았습니다
 
 // 1. 전역 변수 (API URL) 정의

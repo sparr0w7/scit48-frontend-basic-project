@@ -1,4 +1,8 @@
 
+import { attachSocketLogger } from "../shared/messagesSocket.js";
+
+attachSocketLogger("about");
+
 document.querySelectorAll('.FAQ [role="button"]').forEach(button => {
     button.addEventListener('click', (e) => {
         const existing = document.querySelector('.faq-popup');
@@ -37,4 +41,3 @@ document.querySelectorAll('.FAQ [role="button"]').forEach(button => {
 
     });
 });
-

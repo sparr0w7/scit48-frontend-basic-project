@@ -43,8 +43,10 @@ h1 {
 }
 
 .site-header {
-  border-bottom: 1px solid #24323D;
-  background-color: black;
+  border-bottom: 1px solid #24323d;
+  background: linear-gradient(135deg, #172132, #0f1217);
+  color: #f6f8ff;
+  box-shadow: 0 8px 24px rgba(10, 12, 16, 0.6);
 }
 
 .site-header__inner {
@@ -77,18 +79,27 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  color: inherit;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-header__nav-list a:hover,
+.site-header__nav-list a:focus-visible {
+  color: #7ba2ff;
+  border-color: #7ba2ff;
 }
 
 .site-header__nav-list a.is-current {
   font-weight: 600;
-  border-color: #333;
+  color: #ffffff;
+  border-color: #7ba2ff;
 }
 
 .site-header__nav-list .current-indicator {
   font-size: 0.85em;
   font-weight: 400;
   margin-left: 0.25rem;
-  color: #555;
+  color: #ccccff;
 }
 
 .site-footer {
@@ -120,4 +131,53 @@ h1 {
   height: 40px;
   border: 1px solid #24323D;
   border-radius: 15px;
+}
+
+.toast-container {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1000;
+}
+
+.toast {
+  min-width: 260px;
+  max-width: 320px;
+  background: rgba(15, 18, 23, 0.95);
+  border: 1px solid #24323d;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  color: #f5f5ff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.toast-meta {
+  font-size: 0.8rem;
+  color: #8aa0ff;
+  margin-bottom: 0.25rem;
+}
+
+.toast-body {
+  font-size: 0.9rem;
+  color: #d3d6ff;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

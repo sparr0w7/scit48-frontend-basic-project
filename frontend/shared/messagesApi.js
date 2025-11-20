@@ -64,6 +64,14 @@ export function getMyPublicIp() {
 }
 
 /**
+ * GET /messages/nearby
+ * Res: { me: string, network: string | null, users: NearbySummary[] }
+ */
+export function getNearbyUsers() {
+  return request("/messages/nearby");
+}
+
+/**
  * GET /messages/inbox
  * Req query: { cursor?: string, limit?: number } (receiver IP auto-detected)
  * Res: { data: MessageDto[], nextCursor: string | null }

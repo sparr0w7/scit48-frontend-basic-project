@@ -14,6 +14,7 @@ import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { MessageDto } from './dto/message.dto';
 import { CursorPaginationDto, StatusParamDto } from './dto/query-messages.dto';
+import { NearbyUsersResponseDto } from './dto/nearby-users.dto';
 import { Request } from 'express';
 import { getClientIp } from '../../common/utils/request-ip.util';
 
@@ -37,6 +38,18 @@ export class MessagesController {
   getMyIp(@Req() req: Request) {
     const ip = getClientIp(req);
     return { ip };
+  }
+
+  @Get('nearby')
+  @ApiOperation({ summary: '같은 /24 대역의 활동 사용자 조회' })
+  @ApiResponse({
+    status: 200,
+    description: '주변 사용자 목록',
+    type: NearbyUsersResponseDto,
+  })
+  getNearbyUsers(@Req() req: Request) {
+    const ip = getClientIp(req);
+    return this.messagesService.getNearbyUsers(ip);
   }
 
   @Post()

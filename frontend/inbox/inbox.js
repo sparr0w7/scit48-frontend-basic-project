@@ -7,9 +7,8 @@ import {
   cancelMessage,
   deleteMessage,
   getMessagesByStatus,
-  getMyPublicIp,
-  connectMessagesSocket,
 } from "../shared/messagesApi.js";
+import { subscribeToMessages } from "../shared/messagesSocket.js";
 let messages = [];
 const listRender = (messages) => {
   const inboxList = document.getElementById("inbox-list");
@@ -41,8 +40,7 @@ const emptyRender = () => {
 };
 
 const init = async () => {
-  const ip = await getMyPublicIp();
-  connectMessagesSocket({
+  subscribeToMessages({
     onReceived: (msg) => {
       console.log("📩 새 메시지 수신:", msg);
       messages = [msg, ...messages];
