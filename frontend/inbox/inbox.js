@@ -32,7 +32,7 @@ const listRender = (messages) => {
         <a href="#" class="message-item">
           <div class="message-item__row">
             <span class="msg-label">발신자</span>
-            <span class="msg-value">${item.toIP}</span>
+            <span class="msg-value">${item.fromIP}</span>
           </div>
           <div class="message-item__row">
             <span class="msg-label">내용</span>
