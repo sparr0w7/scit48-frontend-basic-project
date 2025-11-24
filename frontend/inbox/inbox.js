@@ -35,8 +35,12 @@ const listRender = (messages) => {
             <span class="msg-value">${item.fromIP}</span>
           </div>
           <div class="message-item__row">
-            <span class="msg-label">내용</span>
+            <span class="msg-label">제목</span>
             <span class="msg-value">${item.subject || "(제목 없음)"}</span>
+          </div>
+          <div class="message-item__row">
+            <span class="msg-label">내용</span>
+            <span class="msg-value msg-value--body">${item.body || "(내용 없음)"}</span>
           </div>
           <div class="message-item__row">
             <span class="msg-label">날짜</span>

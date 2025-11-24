@@ -158,6 +158,14 @@ body {
 
 .msg-value {
   color: #f4f6ff;
+  font-weight: 600;
+  display: block;
+  word-break: break-word;
+}
+
+.msg-value--body {
+  font-weight: 400;
+  color: #cfd7f0;
 }
 
 .inbox-empty {
