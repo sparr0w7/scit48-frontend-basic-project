@@ -8,7 +8,7 @@ attachSocketLogger("nearby");
 
 const listElement = document.getElementById("nearby-list");
 const statusElement = document.getElementById("nearby-status");
-const networkElement = document.getElementById("nearby-network");
+const countElement = document.getElementById("nearby-count");
 const refreshButton = document.getElementById("nearby-refresh");
 
 let isLoading = false;
@@ -28,8 +28,10 @@ async function loadNearbyUsers(showSpinner = true) {
 
   try {
     const response = await getNearbyUsers();
-    updateNetwork(response?.network ?? null);
-    renderUsers(response?.users ?? []);
+    const users = response?.users ?? [];
+    updateSubnet(response?.network ?? null);
+    updateCount(users.length);
+    renderUsers(users);
   } catch (error) {
     console.error("주변 사용자 조회 실패:", error);
     showStatus(
@@ -53,35 +55,16 @@ function renderUsers(users) {
   const fragment = document.createDocumentFragment();
 
   users.forEach((user) => {
-    const card = document.createElement("article");
-    card.className = "nearby-card";
-
-    const subject = user.recentSubject || "최근 메시지 없음";
-    const preview = user.recentPreview || "내용을 확인해 보세요.";
-    const ipLabel = escapeHtml(user.ip);
-
-    card.innerHTML = `
-      <div class="nearby-card__ip">${ipLabel}</div>
-      <div class="nearby-card__meta">
-        <span class="nearby-card__badge">보냄 ${user.sentCount}</span>
-        <span class="nearby-card__badge nearby-card__badge--secondary">
-          받음 ${user.receivedCount}
-        </span>
-      </div>
-      <div class="nearby-card__time">${formatTime(user.lastActive)}</div>
-      <div class="nearby-card__subject">${escapeHtml(subject)}</div>
-      <p class="nearby-card__preview">${escapeHtml(preview)}</p>
-    `;
-
-    fragment.appendChild(card);
+    const row = document.createElement("div");
+    row.className = "nearby-ip-row";
+    row.textContent = user.ip ? user.ip : "알 수 없는 IP";
+    fragment.appendChild(row);
   });
 
   listElement.replaceChildren(fragment);
 }
 
-function updateNetwork(networkLabel) {
-  networkElement.textContent = networkLabel || "확인 중...";
-
+function updateSubnet(networkLabel) {
   subnetPrefix = null;
   if (networkLabel) {
     const match = networkLabel.match(/^(\d+\.\d+\.\d+)\.0\/24$/);
@@ -89,6 +72,11 @@ function updateNetwork(networkLabel) {
       subnetPrefix = `${match[1]}.`;
     }
   }
+}
+
+function updateCount(count) {
+  if (!countElement) return;
+  countElement.textContent = count > 0 ? `${count}명` : "없음";
 }
 
 function showStatus(state, message) {
