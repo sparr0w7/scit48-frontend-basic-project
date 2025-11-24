@@ -10,33 +10,82 @@ import {
 } from "../shared/messagesApi.js";
 import { subscribeToMessages } from "../shared/messagesSocket.js";
 let messages = [];
+const inboxList = document.getElementById("inbox-list");
+const cardsContainer = inboxList?.querySelector(".cards");
+const totalElement = document.getElementById("inbox-total");
+const refreshButton = document.getElementById("inbox-refresh");
+
 const listRender = (messages) => {
-  const inboxList = document.getElementById("inbox-list");
-  console.log(messages);
-  if (!messages) {
+  if (!cardsContainer) {
+    return;
+  }
+
+  if (!messages || messages.length === 0) {
     emptyRender();
     return;
   }
-  inboxList.innerHTML = "";
+
+  cardsContainer.innerHTML = "";
   messages.forEach((item) => {
-    inboxList.innerHTML += `
-    <li>
-      <a href="#" class="message-item">
-        <span class="msg-index"><b>발신자</b> : ${item.toIP}</span><br>
-        <span class="msg-title"><b>내용</b> : ${item.subject}</span><br>
-        <span class="msg-title"><b>날짜</b> : ${item.createdAt}</span>
-      </a>
-    </li>
-    <hr>
+    cardsContainer.innerHTML += `
+      <li class="inbox-card">
+        <a href="#" class="message-item">
+          <div class="message-item__row">
+            <span class="msg-label">발신자</span>
+            <span class="msg-value">${item.toIP}</span>
+          </div>
+          <div class="message-item__row">
+            <span class="msg-label">내용</span>
+            <span class="msg-value">${item.subject || "(제목 없음)"}</span>
+          </div>
+          <div class="message-item__row">
+            <span class="msg-label">날짜</span>
+            <span class="msg-value">${formatTimestamp(item.createdAt)}</span>
+          </div>
+        </a>
+      </li>
     `;
   });
+
+  updateTotal(messages.length);
 };
 
 const emptyRender = () => {
-  const inboxList = document.getElementById("inbox-list");
-  inboxList.innerHTML += `
-            <h2>받은 쪽지가 없습니다.</h2>
-        `;
+  if (!cardsContainer) {
+    return;
+  }
+
+  cardsContainer.innerHTML = `
+    <li class="inbox-card inbox-card--empty">
+      <div class="inbox-empty">
+        <p>받은 쪽지가 없습니다.</p>
+        <span>새로운 메시지가 도착하면 자동으로 표시됩니다.</span>
+      </div>
+    </li>
+  `;
+  updateTotal(0);
+};
+
+const updateTotal = (count) => {
+  if (totalElement) {
+    totalElement.textContent = count.toString();
+  }
+};
+
+const formatTimestamp = (value) => {
+  if (!value) {
+    return "-";
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+  return date.toLocaleString("ko-KR", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 };
 
 const init = async () => {
@@ -44,21 +93,18 @@ const init = async () => {
     onReceived: (msg) => {
       console.log("📩 새 메시지 수신:", msg);
       messages = [msg, ...messages];
-      // 예: 받은 쪽지 목록에 추가
       listRender(messages);
     },
 
     onUpdated: (msg) => {
       console.log("📝 메시지 수정됨:", msg);
-      // 예: 상태(status) 갱신
     },
 
     onDeleted: (id) => {
       console.log("❌ 메시지 삭제됨:", id);
-      // 예: 해당 id 항목을 DOM에서 제거
     },
   });
-  console.log("init");
+
   try {
     const response = await getInboxMessages();
     messages = response.data;
@@ -68,3 +114,5 @@ const init = async () => {
   }
 };
 init();
+
+refreshButton?.addEventListener("click", () => window.location.reload());

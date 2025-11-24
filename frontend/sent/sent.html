@@ -6,12 +6,49 @@
   <title>IpTalk · 보낸쪽지</title>
   <link rel="stylesheet" href="../shared/base.css" />
   <link rel="stylesheet" href="./sent.css" />
+  <style>
+    body {
+      background-color: #05070d;
+      color: #f5f6ff;
+    }
+    .page-note {
+      color: #9fa7c4;
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
-  <main class="container">
-    <h1>보낸쪽지</h1>
-    <p class="page-note">이 페이지는 추후 개발 예정인 플레이스홀더입니다.</p>
+  <main class="container sent-page">
+    <header class="sent-header">
+      <div>
+        <h1>보낸쪽지</h1>
+        <p class="page-note">최근에 발송한 쪽지를 상태별로 확인해 보세요.</p>
+      </div>
+      <button class="sent-refresh" id="sent-refresh" type="button">새로고침</button>
+    </header>
+
+    <section class="sent-summary">
+      <div class="sent-summary__item">
+        <p class="sent-summary__label">총 보낸 쪽지</p>
+        <p class="sent-summary__value" id="sent-total">0</p>
+      </div>
+      <div class="sent-summary__item">
+        <p class="sent-summary__label">전송 완료</p>
+        <p class="sent-summary__value sent-summary__value--success" id="sent-sent">
+          0
+        </p>
+      </div>
+      <div class="sent-summary__item">
+        <p class="sent-summary__label">취소/실패</p>
+        <p class="sent-summary__value sent-summary__value--warning" id="sent-error">
+          0
+        </p>
+      </div>
+    </section>
+
+    <section id="sent-list" class="sent-list">
+      <ol class="cards"></ol>
+    </section>
   </main>
   <div id="footer"></div>
   <script type="module">
