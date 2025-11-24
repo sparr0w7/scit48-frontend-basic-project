@@ -112,6 +112,12 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
     this.sessionByClientId.set(clientId, sessionId);
 
     try {
+      // 이전에 끊기지 않은 동일 IP 세션을 정리해 카운트 누적을 방지
+      await this.prisma.connectionSession.updateMany({
+        where: { ip, disconnectedAt: null },
+        data: { disconnectedAt: new Date() },
+      });
+
       await this.prisma.connectionSession.create({
         data: {
           id: sessionId,

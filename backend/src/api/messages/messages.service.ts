@@ -125,7 +125,10 @@ export class MessagesService {
 
   async getNearbyUsers(requestIp: string) {
     const sessions = await this.prisma.connectionSession.findMany({
-      where: { disconnectedAt: null },
+      where: {
+        disconnectedAt: null,
+        NOT: { ip: requestIp },
+      },
       orderBy: { connectedAt: 'desc' },
       take: 200,
     });
