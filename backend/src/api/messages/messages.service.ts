@@ -152,19 +152,9 @@ export class MessagesService {
       take: 200,
     });
 
-    type NearbyEntry = {
-      ip: string;
-      lastActive: Date;
-      recentMessageAt: Date;
-      recentSubject: string | null;
-      recentPreview: string | null;
-      sentCount: number;
-      receivedCount: number;
-    };
+    const users = [];
 
-    const entries = new Map<string, NearbyEntry>();
-
-    const updateEntry = (
+    const pushEntry = (
       ip: string | null | undefined,
       direction: 'sent' | 'received',
       message: Message,
@@ -173,50 +163,20 @@ export class MessagesService {
         return;
       }
 
-      const existing = entries.get(ip) ?? {
+      users.push({
         ip,
-        lastActive: new Date(0),
-        recentMessageAt: new Date(0),
-        recentSubject: null,
-        recentPreview: null,
-        sentCount: 0,
-        receivedCount: 0,
-      };
-
-      if (message.createdAt > existing.lastActive) {
-        existing.lastActive = message.createdAt;
-      }
-
-      if (direction === 'sent') {
-        existing.sentCount += 1;
-      } else {
-        existing.receivedCount += 1;
-      }
-
-      if (!existing.recentMessageAt || message.createdAt > existing.recentMessageAt) {
-        existing.recentMessageAt = message.createdAt;
-        existing.recentSubject = message.subject ?? null;
-        existing.recentPreview = this.buildPreview(message.body);
-      }
-
-      entries.set(ip, existing);
+        lastActive: message.createdAt.toISOString(),
+        sentCount: direction === 'sent' ? 1 : 0,
+        receivedCount: direction === 'received' ? 1 : 0,
+        recentSubject: message.subject ?? null,
+        recentPreview: this.buildPreview(message.body),
+      });
     };
 
     messages.forEach((message) => {
-      updateEntry(message.fromIP, 'sent', message);
-      updateEntry(message.toIP, 'received', message);
+      pushEntry(message.fromIP, 'sent', message);
+      pushEntry(message.toIP, 'received', message);
     });
-
-    const users = Array.from(entries.values())
-      .sort((a, b) => b.lastActive.getTime() - a.lastActive.getTime())
-      .map((entry) => ({
-        ip: entry.ip,
-        lastActive: entry.lastActive.toISOString(),
-        sentCount: entry.sentCount,
-        receivedCount: entry.receivedCount,
-        recentSubject: entry.recentSubject,
-        recentPreview: entry.recentPreview,
-      }));
 
     return {
       me: requestIp,
