@@ -33,3 +33,14 @@ model Message {
   @@index([fromIP, createdAt, id], name: "ix_messages_fromip_time")
   @@index([status],                name: "ix_messages_status")
 }
+
+// 소켓 접속 세션 기록
+model ConnectionSession {
+  id             String   @id @db.VarChar(191)
+  ip             String   @db.VarChar(45)
+  connectedAt    DateTime @default(now()) @map("connected_at")    @db.DateTime(3)
+  disconnectedAt DateTime? @map("disconnected_at")                @db.DateTime(3)
+
+  @@map("connection_sessions")
+  @@index([ip, connectedAt], name: "ix_conn_sessions_ip_connected")
+}

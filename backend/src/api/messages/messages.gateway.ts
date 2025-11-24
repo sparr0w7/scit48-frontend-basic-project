@@ -11,6 +11,8 @@ import {
 import { Message } from '@prisma/client';
 import { Server, Socket } from 'socket.io';
 import { getClientIp } from '../../common/utils/request-ip.util';
+import { PrismaService } from '../../prisma/prisma.service';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 @WebSocketGateway({
@@ -26,6 +28,9 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
 
   private readonly logger = new Logger(MessagesGateway.name);
   private readonly clientsByIp = new Map<string, Set<Socket>>();
+  private readonly sessionByClientId = new Map<string, string>();
+
+  constructor(private readonly prisma: PrismaService) {}
 
   handleConnection(client: Socket) {
     const ip = this.resolveClientIp(client);
@@ -40,6 +45,7 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
     clients.add(client);
     this.clientsByIp.set(ip, clients);
 
+    this.recordConnect(client.id, ip);
     this.logger.debug(`Client connected from ${ip}. Total: ${clients.size}`);
   }
 
@@ -58,6 +64,8 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
     if (clients.size === 0) {
       this.clientsByIp.delete(ip);
     }
+
+    this.recordDisconnect(client.id);
   }
 
   emitIncomingMessage(message: Message) {
@@ -97,5 +105,44 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
       connection: handshake as any,
       address: handshake.address,
     });
+  }
+
+  private async recordConnect(clientId: string, ip: string) {
+    const sessionId = randomUUID();
+    this.sessionByClientId.set(clientId, sessionId);
+
+    try {
+      await this.prisma.connectionSession.create({
+        data: {
+          id: sessionId,
+          ip,
+        },
+      });
+    } catch (error) {
+      const err = error as Error;
+      this.logger.error(`Failed to record connection for ${ip}: ${err.message}`, err.stack);
+    }
+  }
+
+  private async recordDisconnect(clientId: string) {
+    const sessionId = this.sessionByClientId.get(clientId);
+    if (!sessionId) {
+      return;
+    }
+
+    this.sessionByClientId.delete(clientId);
+
+    try {
+      await this.prisma.connectionSession.updateMany({
+        where: { id: sessionId, disconnectedAt: null },
+        data: { disconnectedAt: new Date() },
+      });
+    } catch (error) {
+      const err = error as Error;
+      this.logger.error(
+        `Failed to record disconnect for session ${sessionId}: ${err.message}`,
+        err.stack,
+      );
+    }
   }
 }

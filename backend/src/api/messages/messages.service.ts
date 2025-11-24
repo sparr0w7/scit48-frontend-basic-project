@@ -124,63 +124,24 @@ export class MessagesService {
   }
 
   async getNearbyUsers(requestIp: string) {
-    const subnetPrefix = this.extractSubnetPrefix(requestIp);
-    if (!subnetPrefix) {
-      return {
-        me: requestIp,
-        network: null,
-        users: [],
-      };
-    }
-
-    const lookbackHours = 24 * 3;
-    const since = new Date(Date.now() - lookbackHours * 60 * 60 * 1000);
-
-    const messages = await this.prisma.message.findMany({
-      where: {
-        AND: [
-          { createdAt: { gte: since } },
-          {
-            OR: [
-              { fromIP: { startsWith: subnetPrefix } },
-              { toIP: { startsWith: subnetPrefix } },
-            ],
-          },
-        ],
-      },
-      orderBy: { createdAt: 'desc' },
+    const sessions = await this.prisma.connectionSession.findMany({
+      where: { disconnectedAt: null },
+      orderBy: { connectedAt: 'desc' },
       take: 200,
     });
 
-    const users = [];
-
-    const pushEntry = (
-      ip: string | null | undefined,
-      direction: 'sent' | 'received',
-      message: Message,
-    ) => {
-      if (!ip || !ip.startsWith(subnetPrefix) || ip === requestIp) {
-        return;
-      }
-
-      users.push({
-        ip,
-        lastActive: message.createdAt.toISOString(),
-        sentCount: direction === 'sent' ? 1 : 0,
-        receivedCount: direction === 'received' ? 1 : 0,
-        recentSubject: message.subject ?? null,
-        recentPreview: this.buildPreview(message.body),
-      });
-    };
-
-    messages.forEach((message) => {
-      pushEntry(message.fromIP, 'sent', message);
-      pushEntry(message.toIP, 'received', message);
-    });
+    const users = sessions.map((session) => ({
+      ip: session.ip,
+      lastActive: session.connectedAt.toISOString(),
+      sentCount: 0,
+      receivedCount: 0,
+      recentSubject: null,
+      recentPreview: null,
+    }));
 
     return {
       me: requestIp,
-      network: `${subnetPrefix}0/24`,
+      network: null,
       users,
     };
   }
