@@ -7,6 +7,10 @@ export function renderFooter(target) {
 
   const footer = document.createElement("footer");
   footer.className = "site-footer";
+  // 색상 통일: 헤더와 어울리는 어두운 톤으로 강제 지정
+  footer.style.backgroundColor = "#0f1217";
+  footer.style.borderTop = "1px solid #24323d";
+  footer.style.color = "#d5d9e6";
 
   const wrapper = document.createElement("div");
   wrapper.className = "container";
