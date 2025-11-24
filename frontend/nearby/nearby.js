@@ -46,7 +46,7 @@ async function loadNearbyUsers(showSpinner = true) {
 
 function renderUsers(users) {
   if (!users.length) {
-    showStatus("empty", "아직 같은 대역에서 감지된 사용자가 없어요.");
+    showStatus("empty", "사용자가 없어요.");
     listElement.innerHTML = "";
     return;
   }
